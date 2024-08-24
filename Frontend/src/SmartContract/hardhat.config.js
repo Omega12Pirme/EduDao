@@ -12,14 +12,13 @@ task("accounts","Prints the list of the accounts",async (taskArgs , hre )=>{
 module.exports = {
   solidity: "0.8.10",
 
-  defaultNetwork: "eSpace",
+  defaultNetwork: "OpenCampus",
   networks:{
     hardhat:{},
-    eSpace: {
-      url: "https://evmtestnet.confluxrpc.com	",
-      gasPrice: 225000000000,
-      chainId: 71,
-      accounts: ['5753e65f56865a161fbf41932a0d855139a4ce9dc20d82fb655bff393fc41702'],
+    OpenCampus: {
+      url: "https://rpc.open-campus-codex.gelato.digital",
+      chainId: 656476,
+      accounts: ['a77637fc7905e02b1ec4b9e913cc895b627be58053f2fdd774911623004c3285'],
     },
   }
 };

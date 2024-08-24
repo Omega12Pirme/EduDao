@@ -7,7 +7,7 @@ import {Web3} from 'web3';
 import $ from 'jquery'; 
 import ABI from "./SmartContract/artifacts/contracts/InvestmentClub.sol/InvestmentClub.json"
 
-const web3 = new Web3(new Web3.providers.HttpProvider("https://evmtestnet.confluxrpc.com"));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.open-campus-codex.gelato.digital"));
 var contractPublic = null;
 
 

@@ -1,21 +1,115 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import Tg from "./toggle";
-import { UseAlchemy } from './Hooks/Connection';
-import { ParticleNetwork } from "@particle-network/auth";
+
+import {Web3} from 'web3';
+
+
+
 import SideMenu from './Sidemenu';
+
+
+const networks = {
+    OpenCampus: {
+    chainId: `0x${Number(656476).toString(16)}`,
+    chainName: "OpenCampus",
+    nativeCurrency: {
+      name: "OpenCampus",
+      symbol: "EDU",
+      decimals: 18,
+    },
+    rpcUrls: ["https://rpc.open-campus-codex.gelato.digital"],
+    blockExplorerUrls: ['https://opencampus-codex.blockscout.com/'],
+
+  },
+};
+
+var accountAddress= localStorage.getItem("filWalletAddress");
+
+
 
 
 
 function Nav() {
 
-  const {ownerAddress,accountAddress,provider, handleLogin,userInfo,loading,Logout} = UseAlchemy();
   const [isOpen, setIsOpen] = useState(false);
+
+
+
+  const [loading, setLoading] = useState(false);
+  const [address , setAddress] = useState('');
+  const [balance , setBalance] = useState(' ');
+
+
+  const fetchBalance = async () => {
+
+    console.log(address)
+    let web3 = await new Web3(window.ethereum);
+    
+    const balanceWei= await web3.eth.getBalance(accountAddress)
+            
+    const finalbalance = web3.utils.fromWei(balanceWei,"ether")+ " "+networks["OpenCampus"]["nativeCurrency"]["name"];
+    console.log("result->"+finalbalance);
+    setBalance(finalbalance);
+    
+    
+  };
+
+
+  const handleLogin = async () => {
+    setLoading(true);
+    
+    if(typeof window.ethereum =="undefined"){
+      console.log("PLease install the metamask");
+  }
+  let web3 =  new Web3(window.ethereum);
+
+
+  // console.log( "The netwopr is",await web3.network)
+  const chainId = await web3.eth.getChainId();
+
+  const openCampusChainId = parseInt(networks.OpenCampus.chainId, 16);
+
+
+  console.log(parseInt(chainId));
+
+
+  const chainId1 = parseInt(chainId);
+
+  
+ 
+  if(chainId1 !== openCampusChainId){
+
+      await window.ethereum.request({
+          method:"wallet_addEthereumChain",
+          params:[{
+              ...networks["OpenCampus"]
+          }]
+      })
+  }
+  const accounts = await web3.eth.requestAccounts();
+
+  console.log(accounts)
+  const Address =  accounts[0];
+  localStorage.setItem("filWalletAddress",Address)
+
+  console.log(Address)
+  setAddress(Address);
+
+    setLoading(false);
+    window.location.reload();
+  };
+
+
   
   function logout(){
     alert("Logout")
     localStorage.clear();
-    Logout();
+    window.location.reload();
+    // Logout();
   }
+
+
+  console.log(accountAddress)
 
 
 
@@ -37,7 +131,7 @@ function Nav() {
   href="/"
 >
   
-  <div className=" mmh text-lg mx-3">CFX Club</div>
+  <div className=" mmh text-lg mx-3">Celestia Club</div>
 </a>
 </div>
   <button
@@ -87,7 +181,7 @@ function Nav() {
               {accountAddress !== null && !isOpen && (
               <>
               <div className=' name flex'>
-              {userInfo.name}
+              {accountAddress}
                  </div>
               </>
               )
@@ -124,12 +218,12 @@ function Nav() {
             <div className='maincomp flex'>
           {accountAddress && isOpen && (
             <SideMenu
-              address={ownerAddress}
+              address={accountAddress}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
               accountAddress={accountAddress}
               logout={logout}
-              userInfo={userInfo}
+              userInfo={accountAddress}
             />
           )}
           {accountAddress == null && !loading && (
@@ -148,5 +242,3 @@ function Nav() {
 }
 
 export default Nav
-
-
