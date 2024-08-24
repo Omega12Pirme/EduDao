@@ -19,11 +19,11 @@ function SideMenu({ isOpen, setIsOpen, smartAccount, logout, address }) {
   const address1 = localStorage.getItem("filWalletAddress");
 
   function hndclck(){
-    window.open(`https://explorerl2new-live-amber-cougar-9xs8t1or8j.t.conduit.xyz/address/${address1}`, '_blank');
+    window.open(`https://opencampus-codex.blockscout.com//address/${address1}`, '_blank');
   }
 
   function testclk(){
-    window.open('https://live-amber-cougar-9xs8t1or8j.testnets.rollbridge.app/', '_blank');
+    window.open('https://drpc.org/faucet/open-campus-codex', '_blank');
   }
 
   const [value, setValue] = useState(0);
@@ -112,7 +112,7 @@ close
                       <div className='flex mml '>
                       <EthBadge className="text-white" address={accountAddress} />
                       <button  className="btn bg-blue-500  text-white  px-4 rounded-full" onClick={hndclck}>
-                       View on L3 explorer
+                       View on  explorer
                         
                       </button>
                       </div>
@@ -129,7 +129,7 @@ close
 
                       <div class='flex mx-4 mt-3'>
   <div className=' d1 flex items-center bg-zinc-100 text-zinc-300 w-fit p-2 px-3 rounded-l-lg'>
-    <p className='d text-sm'>{'ETH'}</p>
+    <p className='d text-sm'>{'EDU'}</p>
     <p className= 'dd bg-zinc-800 p-1 px-3 ml-3 rounded-lg text-zinc-100'>
       {(value1)}
     </p>
