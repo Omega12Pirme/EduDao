@@ -15,15 +15,16 @@ Therefore, through DAO (decentralized organizations) we can create structures so
 
 
 # Live Frontend:  https://edu-dao.vercel.app/
-# Demo Video:  
+# Demo Video:  https://youtu.be/Hjhu4KV9zcI
+
 </div>
 <a href="#top">Back to top</a>
 
 
 
 
-## Smart Contract deployed on alfajores Testnet  
-- Smart contract -
+## Smart Contract deployed on EDU Testnet  
+- Smart contract - 0x55e543D2b92eb2a40097f2A706437FC1102Ed85C
 
   
 - https://opencampus-codex.blockscout.com/address/0x55e543D2b92eb2a40097f2A706437FC1102Ed85C
